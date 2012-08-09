@@ -18,9 +18,9 @@ import sys
 from glob import glob
 
 import pypackager
-sys.path.append('khtdesktoppr')
+sys.path.append('wleux')
 
-from khtnotes import __version__
+from wleux import __version__
 
 __build__ = '1'
 __author__ = "Benoît HERVIER (khertan)"

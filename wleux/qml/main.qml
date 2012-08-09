@@ -1,5 +1,3 @@
-
-
 /** Wleux : Wallpaper downloader from desktoppr.co for MeeGo Harmattan
  * Copyright (c) 2012 Benoit HERVIER <khertan@khertan.net>
  * Licenced under GPLv3
@@ -276,7 +274,7 @@ PageStackWindow {
                              '\n\nBy Benoît HERVIER (Khertan)' +
                              '\nLicenced under GPLv3' +
                              '\nWallpapers by desktoppr.co'+
-                             '\nDerivated and Inspired by\nThomas Perl\'s "Mustr" app' +
+                             '\n\nDerivated and Inspired by\nThomas Perl\'s "Mustr" app' +
                              '\nhttp://thp.io/2012/mustr/' + 
                              '\nwhich was inspired by Lucas Rocha\'s "Pattrn" app' +
                              '\nMustr Tab support by Seppo Tomperi' +
