@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Wleux
+Exec=/usr/bin/invoker --type=e --single-instance /opt/wleux/__init__.py
+Icon=wleux
+
