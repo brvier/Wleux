@@ -92,7 +92,9 @@ class WallpapersModel(QAbstractListModel):
 
     def loadData(self,):
         try:
-            self._wallpapers = json.load(urllib2.urlopen('https://api.desktoppr.co/1/wallpapers?page=%s' % self._currentpage))
+            self._wallpapers = json.load(urllib2.urlopen( \
+                'https://api.desktoppr.co/1/wallpapers?page=%s' \
+                % self._currentpage))
         except Exception, err:
             self.on_error.emit(unicode(err))
             print err
@@ -104,42 +106,42 @@ class WallpapersModel(QAbstractListModel):
         if self._previouspage == None:
             self._previouspage = 0
 
-        print 'Nextpage:',self._nextpage
-        print 'Previouspage:', self._previouspage
-
         self.on_nextpage.emit()
         self.on_previouspage.emit()
 
     def rowCount(self, parent=QModelIndex()):
         try:
             return len(self._wallpapers['response'])
-        except TypeError, err:
+        except TypeError:
             return 0
 
     def data(self, index, role):
         try:
-            if index.isValid() and role == WallpapersModel.COLUMNS.index('id'):
+            if role == WallpapersModel.COLUMNS.index('id'):
                 return self._wallpapers['response'][index.row()]['id']
-            elif index.isValid() and role == WallpapersModel.COLUMNS.index('preview'):
-                return self._wallpapers['response'][index.row()]['image']['preview']['url']
-            elif index.isValid() and role == WallpapersModel.COLUMNS.index('url'):
-                return self._wallpapers['response'][index.row()]['image']['url']
-            elif index.isValid() and role == WallpapersModel.COLUMNS.index('thumb'):
-                return self._wallpapers['response'][index.row()]['image']['thumb']['url']
-            elif index.isValid() and role == WallpapersModel.COLUMNS.index('user-id'):
+            elif role == WallpapersModel.COLUMNS.index('preview'):
+                return self._wallpapers['response'][index.row()] \
+                       ['image']['preview']['url']
+            elif role == WallpapersModel.COLUMNS.index('url'):
+                return self._wallpapers['response'][index.row()] \
+                       ['image']['url']
+            elif role == WallpapersModel.COLUMNS.index('thumb'):
+                return self._wallpapers['response'][index.row()] \
+                       ['image']['thumb']['url']
+            elif role == WallpapersModel.COLUMNS.index('user-id'):
                 return self._wallpapers['response'][index.row()]['user_id']
-            elif index.isValid() and role == WallpapersModel.COLUMNS.index('username'):
+            elif role == WallpapersModel.COLUMNS.index('username'):
                 return self._wallpapers['response'][index.row()]['user_id']
-            elif index.isValid() and role == WallpapersModel.COLUMNS.index('title'):
-                return os.path.basename(self._wallpapers['response'][index.row()]['image']['url'])
+            elif role == WallpapersModel.COLUMNS.index('title'):
+                return os.path.basename(self._wallpapers['response'] \
+                       [index.row()]['image']['url'])
             return None
-        except (KeyError, TypeError), err:
+        except (KeyError, TypeError):
             return None
 
     @Slot(int)
     def loadPage(self,pageNum):
         self._currentpage = pageNum
-        print 'LoadPage :', pageNum
         self._set_running(True)
         self.thread = threading.Thread(target=self.reload)
         self.thread.start()

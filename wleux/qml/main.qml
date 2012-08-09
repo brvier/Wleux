@@ -115,7 +115,8 @@ PageStackWindow {
                         anchors.fill: parent
                         onClicked: {
                             previewPage.title = title;
-                            previewPage.username = username;
+                            //Not yet available
+                            //previewPage.username = username;
                             previewPage.website = url;
                             previewPage.url = preview;
 
@@ -142,7 +143,9 @@ PageStackWindow {
                                 bottom: parent.bottom
                                 margins: 15
                             }
-                            text: ' ' + title + ' by ' + username
+                            //User not yet available in api
+                            //text: ' ' + title + ' by ' + username
+                            text: ' ' + title
                         }
                     }
 
@@ -219,9 +222,10 @@ PageStackWindow {
                     font.pixelSize: 30
                 }
 
-                Label {
-                    text: 'by ' + previewPage.username
-                }
+                //User not yet available in api
+                //Label {
+                //    text: 'by ' + previewPage.username
+                //}
             }
 
             MouseArea {
