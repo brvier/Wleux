@@ -57,9 +57,8 @@ if __name__ == "__main__":
     p.createDigsigsums = True
     files = []
     p.postinst = '''#!/bin/sh
-chmod +x /opt/khtnotes/__init__.py
-pycompile -O /opt/khtnotes/*.py
-pycompile -O /opt/khtnotes/webdav/*.py'''
+chmod +x /opt/wleux/__init__.py
+pycompile -O /opt/wleux/*.py'''
     p.createDigsigsums = True
 
     #Remove pyc and pyo
@@ -84,6 +83,3 @@ pycompile -O /opt/khtnotes/webdav/*.py'''
         os.mkdir('dists')
     for filepath in glob(p.name+'_'+p.version+'-'+p.buildversion+'*'):
         os.rename(filepath, os.path.join(os.path.dirname(filepath), 'dists', os.path.basename(filepath)))
-
-
-
