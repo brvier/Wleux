@@ -22,10 +22,11 @@ sys.path.append('wleux')
 
 from wleux import __version__
 
-__build__ = '1'
+__build__ = '2'
 __author__ = "Benoît HERVIER (khertan)"
 __mail__ = "khertan@khertan.net"
 __upgrade__ = '''1.0: First public release
+1.0-2: Fix package where python-gconf dep was missing
 '''
 
 if __name__ == "__main__":
@@ -42,7 +43,7 @@ if __name__ == "__main__":
     p.author=__author__
     p.maintainer=__author__
     p.email=__mail__
-    p.depends = "python, python-pyside.qtgui, python-pyside.qtdeclarative, python-pyside.qtcore, python-pyside.qtopengl"
+    p.depends = "python, python-pyside.qtgui, python-pyside.qtdeclarative, python-pyside.qtcore, python-pyside.qtopengl, python-gconf"
     p.suggests = ""
     p.section="user/office"
     p.arch="armel"
