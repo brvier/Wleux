@@ -22,11 +22,12 @@ sys.path.append('wleux')
 
 from wleux import __version__
 
-__build__ = '2'
+__build__ = '1'
 __author__ = "Benoît HERVIER (khertan)"
 __mail__ = "khertan@khertan.net"
 __upgrade__ = '''1.0: First public release
 1.0-2: Fix package where python-gconf dep was missing
+1.1: Add a feature to center the image by scrolling it in the preview before setting it as wallpaper
 '''
 
 if __name__ == "__main__":

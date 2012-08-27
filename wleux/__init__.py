@@ -30,7 +30,7 @@ import threading
 
 __author__ = 'Benoit HERVIER (Khertan)'
 __email__ = 'khertan@khertan.net'
-__version__ = '1.0'
+__version__ = '1.1'
 
 GCONFKEY = '/desktop/meego/background/portrait/picture_filename'
 WALLPATH = '/home/user/.config/wleux_wallpaper.png'
@@ -40,18 +40,19 @@ class Wallpaper(QObject):
         QObject.__init__(self)
         self._running = False
 
-    @Slot(unicode)
-    def setWallpaper(self, url):
+    @Slot(unicode, int, int)
+    def setWallpaper(self, url, offset, width):
         self._set_running(True)
         self.thread = threading.Thread(target=self._setWallpaper, \
-                                        args=(url, ))
+                                        args=(url, offset, width))
         self.thread.start()
 
-    def _setWallpaper(self, url):
+    def _setWallpaper(self, url, offset, width):
         inStream = urllib2.urlopen(url)
         img = QImage.fromData(inStream.read())
         img = img.scaledToHeight(854,Qt.SmoothTransformation)
-        offset = int(img.width() / 2) - 240
+        #offset = int(img.width() / 2) - 240
+        print 'offset:', offset, 'img.width', img.width(), 'width', width
         img = img.copy(offset, 0, 480, 854)
         img.save(WALLPATH)
 

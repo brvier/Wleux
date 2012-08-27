@@ -116,8 +116,8 @@ PageStackWindow {
                             //Not yet available
                             //previewPage.username = username;
                             previewPage.website = url;
-                            previewPage.url = preview;
-
+                            previewPage.url = url;
+                            //previewPage.url = url;
                             pageStack.push(previewPage);
                         }
                     }
@@ -178,20 +178,35 @@ PageStackWindow {
         property string website: ''
         property string url: ''
 
-        Image {
+        Flickable {
+            id: flicker
+
             anchors.fill: parent
-            fillMode: Image.PreserveAspectCrop
-            source: previewPage.url
+            contentWidth: img.paintedWidth
+            contentHeight: 854
+            flickableDirection: Flickable.HorizontalFlick
+            visible: !busyIndicator.visible
+            Image {
+                id:img
+                fillMode: Image.PreserveAspectFit
+                source: previewPage.url
+                sourceSize.height: 854
+                height: 854
+                
+                smooth: true
 
-
-            BusyIndicator {
-                anchors.centerIn: parent
-                visible: parent.status === Image.Loading
-                platformStyle: BusyIndicatorStyle { size: "large" }
-                running: visible
-            }   
+            }
         }
 
+
+        BusyIndicator {
+            id: busyIndicator
+            anchors.centerIn: flicker
+            visible: img.status === Image.Loading
+            platformStyle: BusyIndicatorStyle { size: "large" }
+            running: visible
+        }   
+                
         Rectangle {
             anchors {
                 top: parent.top
@@ -241,7 +256,7 @@ PageStackWindow {
 
             text: 'Use as wallpaper'
             width: parent.width * .7
-            onClicked: wallpaper.setWallpaper(previewPage.website)
+            onClicked: wallpaper.setWallpaper(previewPage.website, flicker.contentX, img.paintedWidth )
             BusyIndicator {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
@@ -280,7 +295,8 @@ PageStackWindow {
                              '\nMustr Tab support by Seppo Tomperi' +
                              '\n\nThanks to : ' +
                              '\nThomas Perl' +
-                             '\nThe team running desktoppr.co'
+                             '\nThe team running desktoppr.co' +
+                             '\nFaenil on #harmattan'
              }
              );
     }
