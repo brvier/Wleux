@@ -22,7 +22,7 @@ sys.path.append('wleux')
 
 from wleux import __version__
 
-__build__ = '1'
+__build__ = '2'
 __author__ = "Benoît HERVIER (khertan)"
 __mail__ = "khertan@khertan.net"
 __upgrade__ = '''1.0: First public release
@@ -59,8 +59,11 @@ if __name__ == "__main__":
     p.createDigsigsums = True
     files = []
     p.postinst = '''#!/bin/sh
+echo "Giving permissions for apps to execute"
 chmod +x /opt/wleux/__init__.py
-pycompile -O /opt/wleux/*.py'''
+echo "Pre compiling Wleux"
+pycompile -O /opt/wleux/*.py
+exit 0'''
     p.createDigsigsums = True
 
     #Remove pyc and pyo
